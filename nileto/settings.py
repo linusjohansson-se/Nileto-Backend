@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'workorders.apps.WorkordersConfig',
     'articles.apps.ArticlesConfig',
     'common.apps.CommonConfig',
-    'customers.apps.CustomersConfig'
+    'customers.apps.CustomersConfig',
+    'business.apps.BusinessConfig'
 ]
 
 MIDDLEWARE = [

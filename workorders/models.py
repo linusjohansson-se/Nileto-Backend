@@ -1,19 +1,43 @@
 from django.db import models
-from django.db.models.deletion import RESTRICT
 
-from common.models import AuditModel, BaseModel
+from common.models import AuditModel
 
-from customers.models import Customer
-from users.models :
+from customers.models import Contact, Customer
 
-class OrderType(BaseModel):
-    name = models.CharField(max_length=255)
+class WorkOrderType(AuditModel):
+    name = models.CharField(max_length=100, null=False, blank=False)
+
+class WorkOrderStatus(AuditModel):
+    name = models.CharField(max_length=100, null=False, blank=False)
+
+class WorkOrderPriority(AuditModel):
+    name = models.CharField(max_length=100, null=False, blank=False)
+    severity = models.IntegerField(blank=False, null=False, default=0)
 
 class WorkOrder(AuditModel):
-    description = models.CharField(max_length=255)
-    customer_id = models.ForeignKey(Customer, on_delete=models.RESTRICT)
-    user_id = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
-    type = models.ForeignKey(OrderType, on_delete=models.RESTRICT)
+    description = models.CharField(max_length=255, null=False, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, related_name="work_orders", null=False)
+    contact = models.ForeignKey(Contact, on_delete=models.RESTRICT, related_name="work_orders", null=True)
+    order_type = models.ForeignKey(WorkOrderType, on_delete=models.RESTRICT, related_name="work_orders", null=False)
+    status = models.ForeignKey(WorkOrderStatus, on_delete=models.RESTRICT, related_name="work_orders", null=False)
+    priority = models.ForeignKey(WorkOrderPriority, on_delete=models.RESTRICT, related_name="work_orders", null=False)
 
+class ActionType(AuditModel):
+    name = models.CharField(max_length=100, null=False, blank=False)
+    billable = models.BooleanField(null=False, default=False)
+    price = models.DecimalField(null=True, max_digits=12, decimal_places=2)
+    cost = models.DecimalField(null=True, max_digits=12, decimal_places=2)
+    export_id = models.CharField(null=False, blank=True, default="")
+    time_tracking = models.BooleanField(null=False, default=False)
+
+class Action(AuditModel):
+    employee = models.ForeignKey
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, null=False, related_name="actions")
+    action_type = models.ForeignKey(ActionType, on_delete=models.RESTRICT)
+    note = models.TextField(null=False, blank=True)
+    internal_note = models.TextField(null=False, blank=True)
+    start_time = models.DateTimeField(null=True)
+    time_taken = models.DurationField(null=True)
+    invoiced = models.BooleanField(null=False)
 
 
