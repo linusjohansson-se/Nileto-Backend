@@ -1,0 +1,27 @@
+services:
+  nileto.backend:
+    build: .
+    container_name: "nileto.backend"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - ".env"
+    depends_on:
+      - nileto.db
+
+  nileto.db:
+    image: "postgres:latest"
+    container_name: "nileto.db"
+    environment:
+      POSTGRES_DB: "nileto"
+      POSTGRES_USER: "niletoadmin"
+      POSTGRES_PASSWORD: "niletoadmin"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/posgresql/data
+
+volumes:
+  postgres_data:
