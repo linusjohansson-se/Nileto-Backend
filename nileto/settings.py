@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'simple_history',
+    'rest_framework',
+    'drf_spectacular',
     'workorders.apps.WorkordersConfig',
     'articles.apps.ArticlesConfig',
     'common.apps.CommonConfig',
@@ -80,7 +82,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nileto.wsgi.application'
 
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Nileto API",
+    "DESCRIPTION": "API for the Nileto work order system.",
+    "VERSION": "1.0.0",
+}
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
