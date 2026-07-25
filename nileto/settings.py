@@ -87,6 +87,10 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": (
+        "rest_framework.pagination.LimitOffsetPagination"
+    ),
+    "PAGE_SIZE": 25,
 }
 
 SPECTACULAR_SETTINGS = {
@@ -94,6 +98,7 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "API for the Nileto work order system.",
     "VERSION": "1.0.0",
 }
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
