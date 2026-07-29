@@ -1,6 +1,6 @@
 from rest_framework import fields, serializers
 
-from .models import Contact, ContactEmail, ContactPhone, Customer, CustomerAddress
+from .models import Contact, ContactEmail, ContactPhone, Customer, CustomerAddress, CustomerContact
 
 class CustomerAddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,4 +30,12 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
+        fields = "__all__"
+
+class CustomerContactSerializer(serializers.ModelSerializer):
+    contact = ContactSerializer(many = False)
+    customer = CustomerSerializer(many = False)
+    
+    class Meta:
+        model = CustomerContact
         fields = "__all__"

@@ -1,9 +1,7 @@
-from rest_framework import viewsets, filters
-
 from common.views import StandardModelViewSet
 
 from .models import Contact, ContactPhone, Customer
-from .serializers import ContactPhoneSerializer, ContactSerializer, CustomerSerializer
+from .serializers import ContactEmailSerializer, ContactPhoneSerializer, ContactSerializer, CustomerContactSerializer, CustomerSerializer
 
 class ContactViewSet(StandardModelViewSet):
     serializer_class = ContactSerializer
@@ -15,7 +13,17 @@ class ContactPhoneViewSet(StandardModelViewSet):
     queryset = ContactPhone.objects.all()
     search_fields = ["phone_number", "=id"]
 
+class ContactEmailViewSet(StandardModelViewSet):
+    serializer_class = ContactEmailSerializer
+    queryset = ContactPhone.objects.all()
+    search_fields = ["email", "=id"]
+
 class CustomerViewSet(StandardModelViewSet):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.prefetch_related("addresses")
     search_fields = ["name", "=id"]
+
+class CustomerContactViewSet(StandardModelViewSet):
+    serializer_class = CustomerContactSerializer
+    queryset = Customer.objects.prefetch_related("customer_links", "contact_links")
+    search_fields = ["customer_links__name", "contact_links__name", "=id"]
