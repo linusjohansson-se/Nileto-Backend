@@ -88,7 +88,6 @@ class ContactEmail(AuditModel):
         return self.email
 
 class ContactPhone(AuditModel):
-    country_code = models.CharField(max_length=10, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name="phone_numbers")
     primary = models.BooleanField(null=False, blank=False, default=False)
@@ -108,4 +107,4 @@ class ContactPhone(AuditModel):
         ]
     
     def __str__(self) -> str:
-        return f"({self.country_code}) {self.phone_number}"
+        return f"({self.phone_number}"

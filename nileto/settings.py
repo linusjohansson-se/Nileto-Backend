@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'simple_history',
     'rest_framework',
     'drf_spectacular',
+    'django_filters',
     'workorders.apps.WorkordersConfig',
     'articles.apps.ArticlesConfig',
     'common.apps.CommonConfig',
@@ -90,6 +91,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": (
         "rest_framework.pagination.LimitOffsetPagination"
     ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter"
+    ],
     "PAGE_SIZE": 25,
 }
 
