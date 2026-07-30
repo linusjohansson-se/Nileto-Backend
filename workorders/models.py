@@ -2,7 +2,7 @@ import re
 
 from django.db import models
 
-from business.models import Employee
+from business.models import Staff
 from common.models import AuditModel
 
 from customers.models import Contact, Customer
@@ -34,7 +34,7 @@ class ActionType(AuditModel):
     time_tracking = models.BooleanField(null=False, default=False)
 
 class Action(AuditModel):
-    employee = models.ForeignKey(Employee, on_delete=models.RESTRICT, null=False, related_name="actions")
+    staff = models.ForeignKey(Staff, on_delete=models.RESTRICT, null=False, related_name="actions")
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, null=False, related_name="actions")
     action_type = models.ForeignKey(ActionType, on_delete=models.RESTRICT)
     note = models.TextField(null=False, blank=True)

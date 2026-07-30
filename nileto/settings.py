@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'common.apps.CommonConfig',
     'customers.apps.CustomersConfig',
-    'business.apps.BusinessConfig'
+    'business.apps.BusinessConfig',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "accounts.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/

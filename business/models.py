@@ -3,9 +3,7 @@ from django.db import models
 from common.models import AuditModel
 from django.conf import settings
 
-# Create your models here.
-
-class Employee(AuditModel):
+class Staff(AuditModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
             null=False,
             blank=False,
