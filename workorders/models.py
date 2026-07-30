@@ -21,7 +21,7 @@ class WorkOrder(AuditModel):
     description = models.CharField(max_length=255, null=False, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT, related_name="work_orders", null=False)
     contact = models.ForeignKey(Contact, on_delete=models.RESTRICT, related_name="work_orders", null=True)
-    order_type = models.ForeignKey(WorkOrderType, on_delete=models.RESTRICT, related_name="work_orders", null=False)
+    type = models.ForeignKey(WorkOrderType, on_delete=models.RESTRICT, related_name="work_orders", null=False)
     status = models.ForeignKey(WorkOrderStatus, on_delete=models.RESTRICT, related_name="work_orders", null=False)
     priority = models.ForeignKey(WorkOrderPriority, on_delete=models.RESTRICT, related_name="work_orders", null=False)
 

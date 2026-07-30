@@ -14,6 +14,5 @@ router.register(
 router.register("customers", CustomerViewSet, basename="customer")
 router.register("contact-email", ContactEmailViewSet, basename="contact-email")
 router.register("customer-contact", CustomerContactViewSet, basename="customer-contact")
-urlpatterns = []
 
-urlpatterns += router.urls
+urlpatterns = router.urls
