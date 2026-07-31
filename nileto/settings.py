@@ -101,10 +101,16 @@ HEADLESS_CLIENTS = ("app",)
 HEADLESS_TOKEN_STRATEGY = (
     "allauth.headless.tokens.strategies.jwt.JWTTokenStrategy"
 )
+HEADLESS_JWT_PRIVATE_KEY = Path(
+    env.str("HEADLESS_JWT_PRIVATE_KEY_FILE")
+).read_text()
 
 WSGI_APPLICATION = 'nileto.wsgi.application'
 
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "allauth.headless.contrib.rest_framework.authentication.JWTTokenAuthentication",
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
