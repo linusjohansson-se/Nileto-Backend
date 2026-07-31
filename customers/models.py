@@ -101,7 +101,7 @@ class ContactPhone(AuditModel):
                 name="only_one_primary_phone_per_contact",
             ),
             models.UniqueConstraint(
-                fields=["country_code", "phone_number"],
+                fields=["phone_number"],
                 name="phone_number_has_to_be_unique",
             ),
         ]
