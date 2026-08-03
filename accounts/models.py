@@ -5,15 +5,15 @@ from django.db.models.functions import Lower
 from accounts.managers import UserManager
 
 class User(AbstractUser):
-    username = None
+    username = None # type: ignore[assignment]
     email = models.EmailField(unique=True)
-    first_name = None
-    last_name = None
+    first_name = None # type: ignore[assignment]
+    last_name = None # type: ignore[assignment]
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    objects = UserManager() # pyright: ignore[reportAssignmentType]
+    objects = UserManager() # type: ignore[misc, assignment]
 
     class Meta(AbstractUser.Meta):
         constraints = [

@@ -34,7 +34,7 @@ class WorkOrderTypeViewSet(StandardModelViewSet):
 
 class ActionViewSet(StandardModelViewSet):
     serializer_class = ActionSerializer
-    queryset = Action.objects.select_related("type")
+    queryset = Action.objects.select_related("action_type")
 
 class ActionTypeViewSet(StandardModelViewSet):
     serializer_class = ActionTypeSerializer
