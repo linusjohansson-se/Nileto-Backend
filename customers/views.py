@@ -1,6 +1,6 @@
 from common.views import StandardModelViewSet
 
-from .models import Contact, ContactPhone, Customer
+from .models import Contact, ContactPhone, Customer, CustomerContact
 from .serializers import ContactEmailSerializer, ContactPhoneSerializer, ContactSerializer, CustomerContactSerializer, CustomerSerializer
 
 class ContactViewSet(StandardModelViewSet):
@@ -25,5 +25,5 @@ class CustomerViewSet(StandardModelViewSet):
 
 class CustomerContactViewSet(StandardModelViewSet):
     serializer_class = CustomerContactSerializer
-    queryset = Customer.objects.prefetch_related("customer_links", "contact_links")
+    queryset = CustomerContact.objects.select_related("customer", "contact")
     search_fields = ["customer_links__name", "contact_links__name", "=id"]
