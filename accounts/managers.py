@@ -1,7 +1,9 @@
 from django.contrib.auth.models import BaseUserManager
-
+from allauth.account.models import EmailAddress
+from django.db import transaction
 
 class UserManager(BaseUserManager):
+    @transaction.atomic
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("An email address is required.")
@@ -14,6 +16,12 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+
+        EmailAddress.objects.create(
+                user=user,
+                email=user.email,
+                primary=True,
+                verified=True)
 
         return user
 

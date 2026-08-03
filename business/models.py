@@ -5,8 +5,8 @@ from django.conf import settings
 
 class Staff(AuditModel):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-            null=False,
-            blank=False,
+            null=True,
+            blank=True,
             on_delete=models.RESTRICT,
             related_name="staff")
     name = models.CharField(max_length=100, blank=False, null=False)
