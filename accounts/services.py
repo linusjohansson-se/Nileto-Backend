@@ -45,7 +45,7 @@ def create_user_for_staff(email, password, staff_id, **user_fields) -> int:
     return user.pk
 
 @transaction.atomic
-def create_contact_user(email, password, contact_id, **user_fields) -> int:
+def create_user_for_contact(email, password, contact_id, **user_fields) -> int:
     """
     Creates a user login for a contact. Does not create the contact.
     """
@@ -110,7 +110,7 @@ def remove_user_for_staff(staff_id) -> bool:
     return True
 
 @transaction.atomic
-def remove_contact_user(contact_id) -> bool:
+def remove_user_for_contact(contact_id) -> bool:
     """
     Removes the user account relationship for the contact.
     If the user account does not have any relationsships left, it will be deactivated.

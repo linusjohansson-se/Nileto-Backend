@@ -28,6 +28,7 @@ urlpatterns = [
     path("_allauth/", include("allauth.headless.urls")),
     path("api/", include("customers.urls")),
     path("api/", include("workorders.urls")),
+    path("api/", include("accounts.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path(
         "api/docs/",
